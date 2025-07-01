@@ -1,0 +1,133 @@
+{
+
+    "devices": [
+        {
+            "device_id": "r1",
+            "tasks" : [
+                       
+                        {
+                            "task_id": "task-2",
+                            "name_report": "perf",
+                            "frequency": "20 seconds"
+                        }
+
+            ],
+            "ips": [
+                "10.0.0.1",
+               "10.0.0.2"
+            ],
+            "device_metrics": {
+                "cpu_usage": true,
+                "ram_usage": true,
+                "interface_stats": ["eth0", "eth1", "eth2"]
+            },
+            "link_metrics": {
+                "bandwidth": {  
+                    "jitter": true,
+                    "packet_loss": true
+                },
+                "latency": true
+                
+            },
+            "alertflow_conditions": {
+                "cpu_usage": "80%",
+                "ram_usage": "90%",
+                "interface_stats": "2000 pps",
+                "packet_loss": "5%",
+                "jitter": "100 ms"
+            }
+        },
+        {
+            "device_id": "r2",
+            "tasks" : [
+                        {
+                            "task_id": "task-1",
+                            "name_report": "ping",
+                            "frequency": "20 seconds"
+                        }
+            ],
+            "ips": [
+                "10.0.1.1",
+               "10.0.2.1"
+            ],
+            "device_metrics": {
+                "cpu_usage": true,
+                "ram_usage": true,
+                "interface_stats": ["eth0", "eth1"]
+            },
+            "link_metrics": {
+                "bandwidth": {
+                   
+                    "jitter": {
+                        "iperf": {
+                            "role": "client",
+                            "server_address": "10.0.0.1",
+                            "test_duration": "30 seconds",
+                            "transport": "UDP"
+                        }
+                    },
+                    "packet_loss": {
+                        "iperf": {
+                            "role": "client",
+                            "server_address": "10.0.0.1",
+                            "test_duration": "30 seconds",
+                            "transport": "UDP"
+                        }
+                    }
+                },
+                "latency": {
+                    "ping": {
+                        "destination": "10.0.0.1",
+                        "packet_count": 4,
+                        "frequency": "5 minutes"
+                    }
+                }
+            },
+            "alertflow_conditions": {
+                "cpu_usage": "0%",
+                "ram_usage": "0%",
+                "packet_loss": "3%"
+            }
+        },
+        {
+            "device_id": "r3",
+            "tasks" : [
+                {
+                    "task_id": "task-2",
+                    "name_report": "ping",
+                    "frequency": "20 seconds"
+                }
+            ],
+            "ips": [
+                "10.0.3.2",
+               "10.0.2.2"
+            ],
+            "device_metrics": {
+                "cpu_usage": true,
+                "ram_usage": true,
+                "interface_stats": ["eth0", "eth1"]
+            },
+            "link_metrics": {
+                "bandwidth": {
+                    "iperf": {
+                        "role": "server",
+                        "test_duration": "30 seconds",
+                        "frequency": "15 minutes"
+                    }
+                },
+                "latency": {
+                    "ping": {
+                        "destination": "10.0.0.1",
+                        "packet_count": 4,
+                        "frequency": "10 minutes"
+                    }
+                }
+            },
+            "alertflow_conditions": {
+                "cpu_usage": "85%",
+                "ram_usage": "85%",
+                "packet_loss": "3%"
+            }
+        }
+    ]
+}
